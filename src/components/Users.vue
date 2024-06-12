@@ -27,3 +27,34 @@
             </tbody>
         </table>
     </div>
+
+    <Modal v-if="showAddUserModal" @close="showAddUserModal = false">
+    <template v-slot:header>
+        <h5>Add New User</h5>
+    </template>
+    <template v-slot:body>
+        <form @submit.prevent="postUser()" class="registration-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input class="form-control" type="text" v-model="newUserData.name" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input class="form-control" type="text" v-model="newUserData.email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input class="form-control" type="password" v-model="newUserData.password" id="password" required>
+            </div>
+            <div class="form-group">
+                <label for="userType">User Type:</label>
+                <select class="form-control" id="userType" v-model="newUserData.userType" required>
+                    <option value="doctor">Doctor</option>
+                    <option value="patient">Patient</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary m-1 btn-block">Register</button>
+        </form>
+        <div v-if="error" class="error">{{ error }}</div>
+    </template>
+</Modal>
